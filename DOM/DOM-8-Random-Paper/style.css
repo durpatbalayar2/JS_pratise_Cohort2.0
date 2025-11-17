@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body{
+    color:#fff
+}
+
+
+main{
+    height: 100%;
+    width: 100%;
+    background-color:#222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+
+button{
+    padding: 1rem 3rem;
+    border-radius: 10px;
+    border: none;
+    font-size: 30px;
+    background-color: rgb(188, 25, 52);
+    color: rgb(212, 216, 221);
+    position: relative;
+    z-index: 9;
+
+}
+
+
+button:active{
+  background-color: rgb(231, 8, 45);
+}
