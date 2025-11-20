@@ -32,12 +32,18 @@ body {
 }
 
 .container i {
-  font-size: 50px;
-  color: aliceblue;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1);
+  font-size: 50px;
   opacity: 0;
-  transition: transform ease 0.4s;
+
+  background-image: url(https://t3.ftcdn.net/jpg/01/14/77/58/360_F_114775804_4yfG9qbKp1NlF1RLo4MUlGIVj9MWhnnc.jpg);
+  background-size: cover;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+
+  transform: translate(-50%, -50%) scale(0) rotate(-60deg);
+  transition: all cubic-bezier(0.65, 1, 0.77, 1.44) 0.4s;
 }

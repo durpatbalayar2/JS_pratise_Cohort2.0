@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body{
+    background-color: #222;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+main{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1{
+    font-size: 40px;
+    font-weight: 200;
+}
+
+h1 span{
+    color:green;
+    display: none;
+}
