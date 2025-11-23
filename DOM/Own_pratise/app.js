@@ -1,17 +1,34 @@
-let input = document.querySelector("input");
+let email = document.querySelector("#email");
+let password = document.querySelector("#password");
+let form = document.querySelector("form");
 
-let span = document.querySelector("span");
+form.addEventListener("submit", function (dets) {
+  dets.preventDefault();
 
-input.addEventListener("input", function () {
-  let left = 20 - input.value.length ;
+  document.querySelector("#emailError").textContent = "";
+  document.querySelector("#passError").textContent = "";
 
-  span.textContent = left;
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  if (left <0){
-    span.style.color = "red"
-    input.style.backgroundColor= "yellow"
-  }else{
-    span.style.color = "white"
-    input.style.backgroundColor = "white";
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^])[A-Za-z\d@$!%*?&#^]{8,}$/;
+
+  let emailAns = emailRegex.test(email.value);
+  let passwordAns = passwordRegex.test(password.value);
+
+  let isValid = true;
+
+  if (!emailAns) {
+    document.querySelector("#emailError").textContent = "Email is incorrect";
+    isValid = false;
+  }
+
+  if (!passwordAns) {
+    document.querySelector("#passError").textContent = "Password is incorrect";
+    isValid = false;
+  }
+
+  if (isValid) {
+    document.querySelector("#resultMessage").textContent = "Everything is OK";
   }
 });

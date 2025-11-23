@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <main>
-        
-        <h1>Total Character Left : <span>20</span></h1>
-        <input type="text" placeholder="Write Anything">
-    </main>
-    <script src="./app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email & Password Validator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Email & Password Validator</h2>
+
+      <form autocomplete="off" id="loginForm">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" id="email" placeholder="Enter your email" />
+          <p class="error" id="emailError"></p>
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+          />
+          <p class="error" id="passError"></p>
+        </div>
+
+        <button type="submit">Validate</button>
+      </form>
+
+      <div id="resultMessage"></div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
 </html>
