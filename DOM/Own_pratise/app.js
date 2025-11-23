@@ -1,7 +1,17 @@
-//Difference b/w htmlContent,innerText and innerHTMl
+let input = document.querySelector("input");
 
-let main = document.querySelector("main")
+let span = document.querySelector("span");
 
-let h1= document.querySelector("h1")
+input.addEventListener("input", function () {
+  let left = 20 - input.value.length ;
 
-h1.textContent = `<p>Hello Hari How are you</p>`
+  span.textContent = left;
+
+  if (left <0){
+    span.style.color = "red"
+    input.style.backgroundColor= "yellow"
+  }else{
+    span.style.color = "white"
+    input.style.backgroundColor = "white";
+  }
+});
