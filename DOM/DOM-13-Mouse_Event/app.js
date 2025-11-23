@@ -1,10 +1,10 @@
-let main = document.querySelector("main");
 let box = document.querySelector("#box");
 
-box.addEventListener("mouseover", function () {
-  box.style.backgroundColor = "red";
-});
+window.addEventListener("mousemove", function (dets) {
+//   box.style.left = dets.x + "px";
+//   box.style.top = dets.y + "px";
 
-box.addEventListener("mouseout", function () {
-  box.style.backgroundColor = "yellow";
+box.style.top = dets.clientY + "px"
+box.style.left = dets.clientX + "px"
+
 });
