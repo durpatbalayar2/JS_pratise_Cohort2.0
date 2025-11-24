@@ -40,7 +40,7 @@ const cardsBox = document.querySelector(".cards");
 const inp = document.querySelector(".inp");
 
 function showUsers(arr) {
-  cardsBox.innerHTML = ""; // Clear old cards
+  cardsBox.innerHTML = ""; 
 
   // If no user found
   if (arr.length === 0) {
