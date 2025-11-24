@@ -1,35 +1,69 @@
-/* Light mode default */
 body {
-  background: white;
-  color: black;
-  font-family: Arial, sans-serif;
-  transition: 0.3s;
-
+  background: #000000;
   display: flex;
-  align-items: center;
   justify-content: center;
-  flex-direction: column;
-  padding: 10rem;
+  align-items: center;
+  
+  height: 100vh;
+  font-family: "Helvetica Neue", sans-serif;
 }
 
-/* Dark mode */
-body.dark {
-  background: #111;
+.card {
+  position: relative;
+  width: 180px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  
+}
+
+.bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.blurred-layer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  
+  background-size: cover;
+  background-position: bottom;
+  filter: blur(8px);
+  z-index: 1;
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0)
+  );
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+}
+
+.content {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
   color: white;
+  z-index: 2;
 }
 
-/* Button styling */
-#themeBtn {
-  padding: 10px 15px;
-  border: none;
-  background: #444;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-bottom: 20px;
+.content h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 6px;
 }
 
-body.dark #themeBtn {
-  background: #ddd;
-  color: black;
+.content p {
+  font-size: 14px;
+  color: #ddd;
+  line-height: 1.4;
 }
