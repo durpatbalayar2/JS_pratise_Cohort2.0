@@ -36,29 +36,33 @@ const users = [
   },
 ];
 
-function showUsers(arr) {
-  arr.forEach(function (user) {
-    //outer card div create
+const cardsBox = document.querySelector(".cards");
+const inp = document.querySelector(".inp");
 
+function showUsers(arr) {
+  cardsBox.innerHTML = ""; // Clear old cards
+
+  // If no user found
+  if (arr.length === 0) {
+    cardsBox.innerHTML = "<h2>No user found</h2>";
+    return;
+  }
+
+  // Creating cards
+  arr.forEach((user) => {
     const card = document.createElement("div");
     card.classList.add("card");
 
-    // Image
     const img = document.createElement("img");
     img.src = user.pic;
-
     img.classList.add("bg-img");
 
-    // Blurred Layer
     const blurLayer = document.createElement("div");
     blurLayer.style.backgroundImage = `url(${user.pic})`;
     blurLayer.classList.add("blurred-layer");
 
-    // create div Content
     const content = document.createElement("div");
     content.classList.add("content");
-
-    // Create h3 and paragraph
 
     const h3 = document.createElement("h3");
     h3.textContent = user.name;
@@ -66,35 +70,27 @@ function showUsers(arr) {
     const p = document.createElement("p");
     p.textContent = user.bio;
 
-    // Append heading and paragraph to content
     content.appendChild(h3);
     content.appendChild(p);
 
-    // Append all to card
     card.appendChild(img);
     card.appendChild(blurLayer);
     card.appendChild(content);
 
-    // Finally append card to main container
-
-    document.querySelector(".cards").appendChild(card);
+    cardsBox.appendChild(card);
   });
 }
 
 showUsers(users);
 
-let inp = document.querySelector(".inp");
-
+// Searching users
 inp.addEventListener("input", function () {
-  let newUsers = users.filter((user) => {
-    return user.name.startsWith(inp.value);
-  });
+  const text = inp.value.toLowerCase();
 
-  document.querySelector(".cards").innerHTML = "";
+  const matchedUsers = users.filter((user) =>
+    user.name.toLowerCase().startsWith(text)
+  );
 
-  showUsers(newUsers);
+  showUsers(matchedUsers);
 });
 
-// Saare user show karaana
-//filter karna har baar input karne pe
-// show karna filters users
