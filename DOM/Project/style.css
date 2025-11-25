@@ -10,46 +10,121 @@ body {
 }
 
 body {
-  background-color: #000;
+  background-color: #171616;
+  color: #fff;
 }
 
 main {
   height: 100%;
   width: 100%;
-  background: linear-gradient(to right bottom rgb(26, 26, 26), rgb(35, 35, 35));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 section {
   height: 100%;
-  width: 350px;
+  width: 550px;
+  padding: 10px 0;
+  overflow-y: auto;
+  gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
 
-  background-color: black;
-  border-radius: 10px;
-  margin: auto;
-  overflow: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
-.all-reels {
-  height: 100%;
-  width: 100%;
-  background-color: crimson;
+section::-webkit-scrollbar {
+  display: none;
 }
 
-.reel {
-  height: 100%;
+.card {
   width: 100%;
+  height: 100vh;
+  /* background-color: #fff; */
+  border-radius: 18px;
   position: relative;
-  background-color: lightblue;
   overflow: hidden;
+  scroll-snap-align: start;
+}
+
+.card video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.card .bottom {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 5px;
+  padding: 10px;
+}
+
+.card .bottom .bottom-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card .bottom .bottom-container img {
+  height: 60px;
+  width: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.card .bottom .bottom-container h2 {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.card .bottom .bottom-container button {
+  padding: 8px 30px;
+  font-size: 20px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
   border-radius: 10px;
 }
 
-.reel img {
-  height: 100%;
-  width: 100%;
-
+.card .bottom p {
+  font-size: 28px;
+  padding: 20px 10px;
+  font-weight: 500;
 }
 
-.reel .bottom{
-    padding: 30px 20px ;
+.card .right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  gap: 30px;
+  flex-direction: column;
+  bottom: 50px;
+
+  right: 15px;
+}
+
+.card .right .right-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  font-size: 25px;
+}
+
+.card .right .right-icon i {
+  font-size: 40px;
+  font-weight: 100;
+}
+
+.liked {
+  color: red;
 }
