@@ -10,7 +10,7 @@ const reelsData = [
     comment: 32,
     share: 12,
     description: "This is a perfect Moment",
-    video: "https://www.pexels.com/download/video/6235402/",
+    video: "./video/1.mp4",
   },
   {
     isMuted: true,
@@ -34,7 +34,7 @@ const reelsData = [
     comment: 25,
     share: 14,
     description: "Chasing dreams ✨",
-    video: "https://www.pexels.com/download/video/8060928/",
+    video: "./video/2.mp4",
   },
   {
     isMuted: true,
@@ -46,7 +46,7 @@ const reelsData = [
     comment: 78,
     share: 29,
     description: "Life is beautiful 💛",
-    video: "https://www.pexels.com/download/video/5548410/",
+    video: "./video/3.mp4",
   },
   {
     isMuted: true,
@@ -70,7 +70,7 @@ const reelsData = [
     comment: 48,
     share: 21,
     description: "Work hard, enjoy harder!",
-    video: "https://www.pexels.com/download/video/5717289/",
+    video: "./video/4.mp4",
   },
   {
     isMuted: true,
@@ -122,95 +122,116 @@ const reelsData = [
   },
 ];
 
-var allReels = document.querySelector(".all-reels");
-
-var isMuted = true;
+const allReels = document.querySelector(".all-reels");
 
 function addData() {
-  var sum = "";
-  reelsData.forEach(function (elem, idx) {
-    sum =
-      sum +
-      `<div class="reel">
-          <video autoplay loop ${elem.isMuted ? "muted" : ""} src="${
-        elem.video
-      }"></video>
-           <div class="mute" id= ${idx}>
-           ${
-             elem.isMuted
-               ? '  <i class="ri-volume-mute-fill"></i>'
-               : '<i class="ri-volume-up-fill"></i>'
-           }
-           
-           </div>
-          <div class="bottom">
-            <div class="user">
-              <img
-                src="${elem.profileImg}"
-                alt="">
-              <h4>${elem.name}</h4>
-              <button class = "follow"  id=${idx}>${
-        elem.isFollowed ? "Unfollow" : "Follow"
-      }</button>
-            </div>
-            <h3>${elem.description}</h3>
+  let html = "";
+  reelsData.forEach((elem, idx) => {
+    html += `
+      <div class="reel">
+        <video preload="none" playsinline loop ${
+          elem.isMuted ? "muted" : ""
+        } data-index="${idx}">
+          <source data-src="${elem.video}" type="video/mp4">
+        </video>
+
+        <div class="mute" data-index="${idx}">
+          ${
+            elem.isMuted
+              ? `<i class="ri-volume-mute-fill"></i>`
+              : `<i class="ri-volume-up-fill"></i>`
+          }
+        </div>
+
+        <div class="bottom">
+          <div class="user">
+            <img src="${elem.profileImg}" alt="">
+            <h4>${elem.name}</h4>
+            <button class="follow" data-index="${idx}">
+              ${elem.isFollowed ? "Unfollow" : "Follow"}
+            </button>
           </div>
-          <div class="right">
-            <div id= ${idx} class="like">
-              <h4 class="like-icon icon">${
+          <h3>${elem.description}</h3>
+        </div>
+
+        <div class="right">
+          <div class="like" data-index="${idx}">
+            <h4 class="like-icon icon">
+              ${
                 elem.isLiked
-                  ? '<i class="love ri-heart-3-fill"></i>'
-                  : '<i class="ri-heart-3-line"></i>'
-              }</h4>
-              <h6>${elem.likes}</h6>
-            </div>
-            <div class="comment">
-              <h4 class="comment-icon icon"><i class="ri-chat-3-line"></i></h4>
-              <h6>${elem.comment}</h6>
-            </div>
-            <div class="share">
-              <h4 class="share-icon icon"><i class="ri-share-forward-line"></i></h4>
-              <h6>${elem.share}</h6>
-            </div>
-            <div class="menu">
-              <h4 class="menu-icon icon"><i class="ri-more-2-fill"></i></h4>
-            </div>
+                  ? `<i class="love ri-heart-3-fill"></i>`
+                  : `<i class="ri-heart-3-line"></i>`
+              }
+            </h4>
+            <h6>${elem.likes}</h6>
           </div>
-        </div>`;
+
+          <div class="comment"><h4><i class="ri-chat-3-line"></i></h4><h6>${
+            elem.comment
+          }</h6></div>
+          <div class="share"><h4><i class="ri-share-forward-line"></i></h4><h6>${
+            elem.share
+          }</h6></div>
+        </div>
+      </div>`;
   });
 
-  allReels.innerHTML = sum;
+  allReels.innerHTML = html;
+  lazyLoadVideos();
 }
 
 addData();
 
-allReels.addEventListener("click", function (dets) {
-  if (dets.target.className == "like") {
-    if (!reelsData[dets.target.id].isLiked) {
-      reelsData[dets.target.id].likes++;
-      reelsData[dets.target.id].isLiked = true;
-    } else {
-      reelsData[dets.target.id].likes--;
-      reelsData[dets.target.id].isLiked = false;
-    }
-    addData();
+// Lazy Load + auto play visible videos
+
+function lazyLoadVideos() {
+  const videos = document.querySelectorAll("video");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        const source = video.querySelector("source");
+
+        if (entry.isIntersecting) {
+          if (!video.src) {
+            video.src = source.dataset.src;
+            video.load();
+          }
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
+
+  videos.forEach((video) => observer.observe(video));
+}
+
+//Like / Follow / Mute Update Efficiently
+
+allReels.addEventListener("click", (e) => {
+  const btn = e.target.closest(".like, .follow, .mute");
+  if (!btn) return;
+
+  const idx = btn.dataset.index;
+
+  if (btn.classList.contains("like")) {
+    reelsData[idx].isLiked = !reelsData[idx].isLiked;
+    reelsData[idx].likes += reelsData[idx].isLiked ? 1 : -1;
   }
 
-  if (dets.target.className == "follow") {
-    if (!reelsData[dets.target.id].isFollowed) {
-      reelsData[dets.target.id].isFollowed = true;
-    } else {
-      reelsData[dets.target.id].isFollowed = false;
-    }
-    addData();
+  if (btn.classList.contains("follow")) {
+    reelsData[idx].isFollowed = !reelsData[idx].isFollowed;
   }
 
-  if (dets.target.className == "mute") {
-    if (!reelsData[dets.target.id].isMuted) {
-      reelsData[dets.target.id].isMuted = true;
-    } else {
-      reelsData[dets.target.id].isMuted = false;
-    }
-    addData();
+  if (btn.classList.contains("mute")) {
+    const video = document.querySelector(`video[data-index="${idx}"]`);
+    reelsData[idx].isMuted = !reelsData[idx].isMuted;
+    video.muted = reelsData[idx].isMuted;
   }
+
+  addData();
 });
