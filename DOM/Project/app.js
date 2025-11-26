@@ -1,5 +1,6 @@
 const reelsData = [
   {
+    isMuted: true,
     profileImg:
       "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     name: "Sushila Singh",
@@ -12,6 +13,7 @@ const reelsData = [
     video: "https://www.pexels.com/download/video/6235402/",
   },
   {
+    isMuted: true,
     profileImg: "https://randomuser.me/api/portraits/men/11.jpg",
     name: "Rohit Sharma",
     isFollowed: true,
@@ -23,6 +25,7 @@ const reelsData = [
     video: "https://www.pexels.com/download/video/4392340/",
   },
   {
+    isMuted: true,
     profileImg: "https://randomuser.me/api/portraits/women/22.jpg",
     name: "Aisha Khan",
     isFollowed: true,
@@ -34,6 +37,7 @@ const reelsData = [
     video: "https://www.pexels.com/download/video/8060928/",
   },
   {
+    isMuted: true,
     profileImg: "https://randomuser.me/api/portraits/men/33.jpg",
     name: "Manish Verma",
     isFollowed: true,
@@ -45,6 +49,7 @@ const reelsData = [
     video: "https://www.pexels.com/download/video/5548410/",
   },
   {
+    isMuted: true,
     profileImg: "https://randomuser.me/api/portraits/women/44.jpg",
     name: "Priya Desai",
     isFollowed: false,
@@ -56,6 +61,7 @@ const reelsData = [
     video: "https://www.pexels.com/download/video/8530838/",
   },
   {
+    isMuted: true,
     profileImg: "https://randomuser.me/api/portraits/men/55.jpg",
     name: "Aman Yadav",
     isFollowed: false,
@@ -67,6 +73,7 @@ const reelsData = [
     video: "https://www.pexels.com/download/video/5717289/",
   },
   {
+    isMuted: true,
     profileImg: "https://randomuser.me/api/portraits/women/66.jpg",
     name: "Neha Patil",
     isFollowed: true,
@@ -78,6 +85,7 @@ const reelsData = [
     video: "https://www.pexels.com/download/video/5120416/",
   },
   {
+    isMuted: true,
     profileImg: "https://randomuser.me/api/portraits/men/77.jpg",
     name: "Suraj Thapa",
     isFollowed: false,
@@ -89,6 +97,7 @@ const reelsData = [
     video: "https://www.pexels.com/download/video/29660256/",
   },
   {
+    isMuted: true,
     profileImg: "https://randomuser.me/api/portraits/women/88.jpg",
     name: "Simran Kaur",
     isFollowed: true,
@@ -100,6 +109,7 @@ const reelsData = [
     video: "https://www.pexels.com/download/video/6194295/",
   },
   {
+    isMuted: true,
     profileImg: "https://randomuser.me/api/portraits/men/99.jpg",
     name: "Vijay Rawat",
     isFollowed: false,
@@ -112,59 +122,95 @@ const reelsData = [
   },
 ];
 
-let reel = "";
-reelsData.forEach(function (elem) {
-  reel =
-    reel +
-    ` <div class="card">
-          <video
-            src=${elem.video}
-            autoplay
-            loop
-            muted
-          > </video>
+var allReels = document.querySelector(".all-reels");
 
+var isMuted = true;
+
+function addData() {
+  var sum = "";
+  reelsData.forEach(function (elem, idx) {
+    sum =
+      sum +
+      `<div class="reel">
+          <video autoplay loop ${elem.isMuted ? "muted" : ""} src="${
+        elem.video
+      }"></video>
+           <div class="mute" id= ${idx}>
+           ${
+             elem.isMuted
+               ? '  <i class="ri-volume-mute-fill"></i>'
+               : '<i class="ri-volume-up-fill"></i>'
+           }
+           
+           </div>
           <div class="bottom">
-            <div class="bottom-container">
+            <div class="user">
               <img
                 src="${elem.profileImg}"
-                alt=""
-              />
-
-              <h2>${elem.name}</h2>
-              <button>${elem.isFollowed ? "Follow" : "Unfollow"}</button>
+                alt="">
+              <h4>${elem.name}</h4>
+              <button class = "follow"  id=${idx}>${
+        elem.isFollowed ? "Unfollow" : "Follow"
+      }</button>
             </div>
-            <p>${elem.description}</p>
+            <h3>${elem.description}</h3>
           </div>
-
           <div class="right">
-            <div class="right-icon">
-               <i class="${
-                 elem.isLiked ? "ri-heart-3-fill liked" : "ri-heart-line"
-               }"></i>
-              <h3>${elem.likes}</h3>
+            <div id= ${idx} class="like">
+              <h4 class="like-icon icon">${
+                elem.isLiked
+                  ? '<i class="love ri-heart-3-fill"></i>'
+                  : '<i class="ri-heart-3-line"></i>'
+              }</h4>
+              <h6>${elem.likes}</h6>
             </div>
-            <div class="right-icon">
-              <i class="ri-chat-3-line"></i>
-              <h3>${elem.comment}</h3>
+            <div class="comment">
+              <h4 class="comment-icon icon"><i class="ri-chat-3-line"></i></h4>
+              <h6>${elem.comment}</h6>
             </div>
-
-            <div class="right-icon">
-              <i class="ri-share-forward-line"></i>
-              <h3>${elem.share}</h3>
+            <div class="share">
+              <h4 class="share-icon icon"><i class="ri-share-forward-line"></i></h4>
+              <h6>${elem.share}</h6>
             </div>
-
-              <div class="right-icon">
-              <i class="ri-more-2-line"></i>
-               
+            <div class="menu">
+              <h4 class="menu-icon icon"><i class="ri-more-2-fill"></i></h4>
             </div>
-
-
-
           </div>
         </div>`;
+  });
+
+  allReels.innerHTML = sum;
+}
+
+addData();
+
+allReels.addEventListener("click", function (dets) {
+  if (dets.target.className == "like") {
+    if (!reelsData[dets.target.id].isLiked) {
+      reelsData[dets.target.id].likes++;
+      reelsData[dets.target.id].isLiked = true;
+    } else {
+      reelsData[dets.target.id].likes--;
+      reelsData[dets.target.id].isLiked = false;
+    }
+    addData();
+  }
+
+  if (dets.target.className == "follow") {
+    if (!reelsData[dets.target.id].isFollowed) {
+      reelsData[dets.target.id].isFollowed = true;
+    } else {
+      reelsData[dets.target.id].isFollowed = false;
+    }
+    addData();
+  }
+
+  if (dets.target.className == "mute") {
+    if (!reelsData[dets.target.id].isMuted) {
+      reelsData[dets.target.id].isMuted = true;
+    } else {
+      reelsData[dets.target.id].isMuted = false;
+    }
+    addData();
+  }
 });
-
-let allReels = document.querySelector("section");
-
-allReels.innerHTML = reel;
