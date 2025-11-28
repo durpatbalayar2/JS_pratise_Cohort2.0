@@ -1,81 +1,170 @@
-//DSA Day3 Loops - while loop
+//DSA Day3 Loops - do...while loop
 
 let prompt = require("prompt-sync")();
 
-// 1. Reverse the number
+//1. Guess a number
 
-let n = +prompt("Enter the number: ");
+// let computer = Math.floor(Math.random() * 100) + 1;
+// let user;
+// let attempt = 0;
+// let maxAttempt = 10;
 
-let rev = 0;
-while (n > 0) {
-  let rem = n % 10;
-  rev = rev * 10 + rem;
-  n = Math.floor(n / 10);
-}
-console.log(rev);
+// do {
+//   if (attempt === 0) {
+//     user = Number(prompt("Enter a number between 1 and 100: "));
+//   } else {
+//     user = Number(
+//       prompt(`Try again (Attempts left: ${maxAttempt - attempt}): `)
+//     );
+//   }
 
-//2. Count the number of digit and sum of digit.
+//   // validate user number before counting attempt
+//   if (user < 1 || user > 100) {
+//     console.log(" Invalid input! Please enter a valid number 1-100.");
+//     continue;
+//   }
 
-let n = +prompt("Enter the number: ");
-let count = 0;
-let sum = 0;
-while (n > 0) {
-  count++;
-  let digit = n%10;
-  sum+=digit;
-  n = Math.floor(n / 10);
-}
-console.log(count, sum);
+//   attempt++;
 
-//3. Check the ISBN is valid or invalid
+//   if (user > computer) console.log("Too large number");
+//   else if (user < computer) console.log("Too small number");
+//   else if (user == computer) {
+//     console.log(
+//       `Congratulations🎉👏. You successfully guessed the number in ${attempt}attempt`
+//     );
+//     break;
+//   } else {
+//     console.log("Invalid input");
+//     break;
+//   }
 
-//Step1. Verify either the given ISBN is 10 digit or not
-//Step2. Use logic
+//   if (attempt == maxAttempt) {
+//     console.log("Game Over! You have used all attempts.");
+//     console.log(`The correct number was: ${computer}`);
+//     break;
+//   }
+// } while (user != computer);
 
-let n = +prompt("Enter the number: ");
+//2. Small calculator
 
-let copy = n;
-let count = 0;
-while (n > 0) {
-  count++;
-  n = Math.floor(n / 10);
-}
-console.log(count);
+// let n;
 
-if (count != 10) console.log("Invalid ISBN");
-else {
-  let ans = 0;
+// do {
+//   console.log("Enter 1 : Addition");
+//   console.log("Enter 2 : Subtraction");
+//   console.log("Enter 3 : Multiplication");
+//   console.log("Enter 4 : Devision");
+//   n = +prompt("Enter a number: ");
 
-  while (copy > 0) {
-    let dig = copy % 10;
-    ans = ans + dig * count;
+//   switch (n) {
+//     case 1: {
+//       let a = +prompt("Enter first number");
+//       let b = +prompt("Enter second number");
+//       console.log(`Sum : ${a} + ${b} = ${a + b}`);
+//       break;
+//     }
 
-    count--;
-    copy = Math.floor(copy / 10);
+//     case 2: {
+//       let a = +prompt("Enter first number");
+//       let b = +prompt("Enter second number");
+//       console.log(`Subtraction : ${a} - ${b} = ${a - b}`);
+//       break;
+//     }
+//     case 3: {
+//       let a = +prompt("Enter first number");
+//       let b = +prompt("Enter second number");
+//       console.log(`Multiple : ${a} * ${b} = ${a * b}`);
+//       break;
+//     }
+
+//     case 4: {
+//       let a = +prompt("Enter first number");
+//       let b = +prompt("Enter second number");
+//       console.log(`Division : ${a} / ${b} = ${a / b}`);
+//       break;
+//     }
+
+//     default:
+//       console.log("Invalid input");
+//   }
+
+//   n = +prompt("Do you want to contine ? Enter10:   ");
+// } while (n == 10);
+
+//3. Resturant Order Food
+
+let key;
+let total = 0;
+
+do {
+  console.log("*******************");
+  console.log("Food Menu");
+  console.log("*******************");
+  console.log("Enter-1: North-Indian Food Items");
+  console.log("Enter-2: South-Indian Food Items");
+  console.log("Enter-3: Chinese Food Items");
+  console.log("Enter-0 : Exit");
+
+  key = +prompt("Enter the number:");
+
+  switch (key) {
+    case 1: {
+      console.log("1.Dal -Rs.80");
+      console.log("2.Rice -Rs.100");
+      console.log("3.Vegetable -Rs.60");
+
+      let n_item = +prompt("Choose your items: ");
+      if (n_item == 1) total += 80;
+      else if (n_item == 2) total += 100;
+      else if (n_item == 1) total += 60;
+      else console.log("Invalid item");
+      break;
+    }
+    case 2: {
+      console.log("1.Sambar -Rs.50");
+      console.log("2.Idly -Rs.100");
+      console.log("3.Dosa -Rs.120");
+      let s_item = +prompt("Choose your items");
+      if (s_item == 1) total += 50;
+      else if (s_item == 2) total += 100;
+      else if (s_item == 3) total += 120;
+      else console.log("Invalid Item");
+      break;
+    }
+    case 3: {
+      console.log("1.Chicken Noodle -Rs.70 ");
+      console.log("2.Momo -Rs.100");
+      console.log("3.Manchurin -Rs.50");
+
+      let c_item = +prompt("Choose your item");
+
+      if (c_item == 1) total += 70;
+      else if (c_item == 2) total += 100;
+      else if (c_item == 3) total += 50;
+      else console.log("Invalid Item");
+      break;
+    }
+
+    case 0: {
+      console.log("Thank you for visiting us !");
+      break;
+    }
+
+    default:
+      console.log("Wrong Entry");
   }
-  console.log(ans);
 
-  console.log(ans % 11 == 0 ? "Valid ISBM" : "Invalid - ISBN");
+  if (key === 0) break;
+
+  let order = prompt("Do you want to order more? (yes/no): ").toLowerCase();
+  if (order !== "yes") break;
+} while (true);
+
+if (key !== 0) {
+  console.log(`Final Bill is Rs.${total}`);
+  console.log("Have a nice day 😊🙏");
+} else if (isNaN(key)) {
+  console.log("Enter a valid number ");
+} else {
+  console.log("Have a nice day 😊🙏");
 }
-
-//3. Check automorphic number
-
-// Those number whose given number and   sqrt.of given  last number match then it is automorphic.
-
-// 5 -> 5^2=25 Here given no. 5 and 25 last number same so it is automorphic if not match not .
-
-let n = +prompt("Enter the number: "); //76
-let copy = n; //76
-let sq = n * n; //5776
-let count = 0;
-
-while (n > 0) {
-  count++;
-  n = Math.floor(n / 10);
-}
-
-console.log(count); //2
-
-if (sq % Math.pow(10, count) == copy) {
-  console.log(copy, "is Automorphic number");
-} else console.log(copy, "is not Automorphic number");
