@@ -1,61 +1,81 @@
-//Day -3 DSA with JS
-
-// Switch Case
-
-// 1. Program to count the number of vowels and consonant in a given string
+//DSA Day3 Loops - while loop
 
 let prompt = require("prompt-sync")();
-let str = prompt("Enter the string: ");
 
-str = str.toLowerCase();
+// 1. Reverse the number
 
-let vowels = 0,
-  consonant = 0;
+let n = +prompt("Enter the number: ");
 
-for (let i = 0; i < str.length; i++) {
-  let char = str[i]; // charAt(i) <-- Both same
+let rev = 0;
+while (n > 0) {
+  let rem = n % 10;
+  rev = rev * 10 + rem;
+  n = Math.floor(n / 10);
+}
+console.log(rev);
 
-  switch (char) {
-    case "a":
-    case "e":
-    case "i":
-    case "o":
-    case "u":
-      vowels++;
-      break;
+//2. Count the number of digit and sum of digit.
 
-    default:
-      consonant++;
+let n = +prompt("Enter the number: ");
+let count = 0;
+let sum = 0;
+while (n > 0) {
+  count++;
+  let digit = n%10;
+  sum+=digit;
+  n = Math.floor(n / 10);
+}
+console.log(count, sum);
+
+//3. Check the ISBN is valid or invalid
+
+//Step1. Verify either the given ISBN is 10 digit or not
+//Step2. Use logic
+
+let n = +prompt("Enter the number: ");
+
+let copy = n;
+let count = 0;
+while (n > 0) {
+  count++;
+  n = Math.floor(n / 10);
+}
+console.log(count);
+
+if (count != 10) console.log("Invalid ISBN");
+else {
+  let ans = 0;
+
+  while (copy > 0) {
+    let dig = copy % 10;
+    ans = ans + dig * count;
+
+    count--;
+    copy = Math.floor(copy / 10);
   }
+  console.log(ans);
+
+  console.log(ans % 11 == 0 ? "Valid ISBM" : "Invalid - ISBN");
 }
 
-console.log("Vowels:", vowels);
-console.log("Consonat:", consonant);
+//3. Check automorphic number
 
-//2 . Program to calculate area of circle , rectangle , triangle using switch.
-let prompt = require("prompt-sync")();
-let choice = +prompt(
-  "Enter your choice number 1.circle, 2.rectangle, 3.triangle area:"
-);
+// Those number whose given number and   sqrt.of given  last number match then it is automorphic.
 
-switch (choice) {
-  case 1:
-    let r = +prompt("Enter the radius: ");
-    console.log("Area of circle:", Math.trunc(Math.PI * r * r));
-    break;
+// 5 -> 5^2=25 Here given no. 5 and 25 last number same so it is automorphic if not match not .
 
-  case 2:
-    let l = +prompt("Enter the length: ");
-    let b = +prompt("Enter the breadth: ");
-    console.log("Area of rectangle:", l * b);
-    break;
+let n = +prompt("Enter the number: "); //76
+let copy = n; //76
+let sq = n * n; //5776
+let count = 0;
 
-  case 3:
-    let base = +prompt("Enter the base: ");
-    let h = +prompt("Enter the height: ");
-    console.log("Area of triangle:", (base * h) / 2);
-    break;
-
-  default:
-    console.log("Invalid Input");
+while (n > 0) {
+  count++;
+  n = Math.floor(n / 10);
 }
+
+console.log(count); //2
+
+if (sq % Math.pow(10, count) == copy) {
+  console.log(copy, "is Automorphic number");
+} else console.log(copy, "is not Automorphic number");
