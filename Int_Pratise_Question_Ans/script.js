@@ -1,102 +1,85 @@
-//DSA Day4 -> Pattern Programming
+//DSA Day4 -> Arrays
 
+//1. Printing array from user
 let prompt = require("prompt-sync")();
 
-let n = +prompt("Enter a number: ");
+let n = +prompt("Enter the size of array: ");
 
-// 1. V-pattern
+let arr = new Array(n);
 
-for (let i = 1; i <= n; i++) {
-  for (let j = 1; j <= 2 * n - 1; j++) {
-    if (j == i || i + j == 2 * n) process.stdout.write("*");
-    else process.stdout.write(" ");
+for (let i = 0; i < arr.length; i++) {
+  arr[i] = +prompt("enter a value : ");
+}
+console.log(arr); //[ 23, 34, 32, 34, 45 ]
+
+//2. Sum of array's  element
+
+let arr = [10, 20, 30, 40, 50];
+let sum = 0;
+for (let i = 0; i < arr.length; i++) {
+  sum = sum + arr[i];
+}
+console.log(sum);
+
+//3.Max element from array
+
+let arr = [10, 20, 30, 40, 50];
+let max = arr[0];
+for (let i = 1; i < arr.length; i++) {
+  if (arr[i] > max) {
+    max = arr[i];
   }
-
-  console.log();
 }
 
-//2. X-Pattern
+console.log(max);
 
-for (let i = 1; i <= n; i++) {
-  for (let j = 1; j <= n; j++) {
-    if (i == j || j + i == n + 1) process.stdout.write("*");
-    else process.stdout.write(" ");
+//4. Find the second max element
+let arr = [10, 20, 30, 40, 50];
+
+let max = Math.max(arr[0], arr[1]);
+let sMax = Math.min(arr[0], arr[1]);
+
+for (let i = 2; i < arr.length; i++) {
+  if (arr[i] > max) {
+    sMax = max;
+    max = arr[i];
+  } else if (arr[i] > sMax && arr[i] != max) {
+    sMax = arr[i];
   }
-  console.log();
+}
+console.log(sMax);
+
+//5. Reverse the array
+let arr = [10, 20, 30, 40, 50];
+
+let i = 0,
+  j = arr.length - 1;
+while (i < j) {
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+
+  i++;
+  j--;
 }
 
-//3.  Inverted Right angle traingle
+console.log(arr);
 
-//    *
-//   **
-//  ***
-// ****
-//*****
+//6. All zeores to left and all ones to right side
 
-for (let i = 1; i <= n; i++) {
-  for (let j = 1; j <= n - i; j++) {
-    process.stdout.write("  ");
+let arr1 = [1, 1, 0, 1, 1, 0, 1, 0, 1];
+
+let i = 0,
+  j = 0;
+
+while (i < arr1.length) {
+  if (arr1[i] == 0) {
+    let temp = arr1[i];
+    arr1[i] = arr1[j];
+    arr1[j] = temp;
+    j++;
   }
-  for (let j = 1; j <= i; j++) {
-    process.stdout.write("* ");
-  }
-  console.log();
+  i++;
 }
 
-//4. Right angle triangle
-// *****
-// ****
-// ***
-// **
-// *
-
-for (let i = 1; i <= n; i++) {
-  for (let j = 1; j <= n - i + 1; j++) {
-    process.stdout.write("* ");
-  }
-  console.log();
-}
-
-//5.
-//A
-//A B
-//A B C
-//A B C D
-//A B C D E
-
-for (let i = 1; i <= n; i++) {
-  for (let j = 1; j <= i; j++) {
-    process.stdout.write(String.fromCharCode(65 + j - 1 )+ " ");
-  }
-  console.log();
-}
-
-//6.
-
-//1
-//1 2
-//1 2 3
-//1 2 3 4
-//1 2 3 4 5
-
-for (let i = 1; i <= n; i++) {
-  for (let j = 1; j <= i; j++) {
-    process.stdout.write(j + " ");
-  }
-  console.log();
-}
-
-// 7.
-
-// 1 2 3 4 5
-// 2 3 4 5
-// 3 4 5
-// 4 5
-// 5
-
-for (let i = 1; i <= n; i++) {
-  for (let j = i; j <= n; j++) {
-    process.stdout.write(j + " ");
-  }
-  console.log();
-}
+console.log(arr1);
