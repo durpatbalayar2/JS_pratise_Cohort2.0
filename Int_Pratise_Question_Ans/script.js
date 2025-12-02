@@ -1,52 +1,71 @@
-//DSA Day5 -> Arrays Question
+//DSA Day6 -> Arrays Question
 
-// Searching Algorithim
+// Sorting Algorithim
 
-//1.Linear Search
-//2.Binary Search
+//1.Bubble Sort
+//2.Selection Sort
+//3.Insertion Sort
 
-//Linear Search
+//Bubble Sort
 
-let arr = [12, 2, 3, 4, 5, 6, 7, 8, 10];
-let t = 8;
-let index = -1; // Store garna
+let arr = [5, 3, 8, 4, 2];
+let n = arr.length; // 5
+for (let i = 0; i < n - 1; i++) {
+  // loop for pass
 
-for (let i = 0; i < arr.length; i++) {
-  if (arr[i] == t) {
-    //found case
-    index = i;
-    break;
+  for (let j = 0; j < n - 1 - i; j++) {
+    // Operation
+
+    if (arr[j] > arr[j + 1]) {
+      //swap
+
+      let temp = arr[j];
+      arr[j] = arr[j + 1];
+      arr[j + 1] = temp;
+    }
   }
 }
 
-console.log(index == -1 ? "not found" : "Found at " + index + " index");
+console.log(arr);
 
-//Binary Search - sorted array
 
-let prompt = require("prompt-sync")();
-let arr = [10, 20, 30, 40, 50, 60, 70];
-let t = +prompt("Enter a value you want to search: ");
-let start = 0; //starting index
-let end = arr.length - 1; // ending index
-let indexFound = -1; // -1 is not found case
+// Selection Sort
+let arr = [5, 3, 8, 4, 2];
+let n = arr.length; // 5
 
-while (start <= end) {
-  let mid = Math.floor((start + end) / 2); // find the mid
+for (let i = 0; i < n - 1; i++) {
+  let min = i;
 
-  if (arr[mid] == t) {
-    indexFound = mid; // found
+  for (let j = i + 1; j < n; j++) {
+    if (arr[j] < arr[min]) min = j;
+  }
 
-    break;
-  } else if (t < arr[mid]) {
-    // left side go
-    end = mid - 1;
-  } else {
-    start = mid + 1; //right side
+  if (min != i) {
+    let temp = arr[min];
+    arr[min] = arr[i];
+
+    arr[i] = temp;
   }
 }
+console.log(arr);
 
-console.log(
-  indexFound == -1
-    ? "Your searched element is not found "
-    : "Your searched element " + t + " found at " + indexFound + " index"
-);
+
+
+//Insertion Sort
+let arr = [5, 3, 8, 4, 2];
+let n = arr.length; // 5
+
+for (let i = 1; i < n; i++) {
+  let key = arr[i];
+
+  let j = i - 1;
+
+  while (j >= 0 && arr[j] > key) {
+    arr[j + 1] = arr[j];
+    j--;
+  }
+
+  arr[j + 1] = key;
+}
+
+console.log(arr);
