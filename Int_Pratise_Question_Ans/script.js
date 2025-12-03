@@ -1,71 +1,51 @@
-//DSA Day6 -> Arrays Question
+//DSA Day7 -> Arrays Question
 
-// Sorting Algorithim
+//Black Swap reverse algo.(Left rotation by 1)
 
-//1.Bubble Sort
-//2.Selection Sort
-//3.Insertion Sort
-
-//Bubble Sort
-
-let arr = [5, 3, 8, 4, 2];
-let n = arr.length; // 5
-for (let i = 0; i < n - 1; i++) {
-  // loop for pass
-
-  for (let j = 0; j < n - 1 - i; j++) {
-    // Operation
-
-    if (arr[j] > arr[j + 1]) {
-      //swap
-
-      let temp = arr[j];
-      arr[j] = arr[j + 1];
-      arr[j + 1] = temp;
-    }
-  }
-}
-
+let arr = [1, 2, 3, 4, 5];
+let k = 3;
+k = k % arr.length;
+reverse(0, k - 1);
+reverse(k, arr.length - 1);
+reverse(0, arr.length - 1);
 console.log(arr);
-
-
-// Selection Sort
-let arr = [5, 3, 8, 4, 2];
-let n = arr.length; // 5
-
-for (let i = 0; i < n - 1; i++) {
-  let min = i;
-
-  for (let j = i + 1; j < n; j++) {
-    if (arr[j] < arr[min]) min = j;
-  }
-
-  if (min != i) {
-    let temp = arr[min];
-    arr[min] = arr[i];
-
-    arr[i] = temp;
-  }
-}
-console.log(arr);
-
-
-
-//Insertion Sort
-let arr = [5, 3, 8, 4, 2];
-let n = arr.length; // 5
-
-for (let i = 1; i < n; i++) {
-  let key = arr[i];
-
-  let j = i - 1;
-
-  while (j >= 0 && arr[j] > key) {
-    arr[j + 1] = arr[j];
+function reverse(i, j) {
+  while (i < j) {
+    let temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+    i++;
     j--;
   }
-
-  arr[j + 1] = key;
 }
 
+// Black Swap reverse algo.(Right rotation by 1)
+let arr = [1, 2, 3, 4, 5];
+let k = 1;
+k = k % arr.length;
+
+reverse(0, arr.length - 1);
+reverse(0, k-1)
+reverse(k,arr.length-1)
 console.log(arr);
+function reverse(i, j) {
+  while (i < j) {
+    let temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+    i++;
+    j--;
+  }
+}
+
+// Remove dublicate from the sorted array
+let arr = [0,0,1,1,1,2,2,3];
+let j = 1;
+for (let i = 0; i < arr.length - 1; i++) {
+  if (arr[i] != arr[i + 1]) {
+    arr[j] = arr[i + 1];
+    j++;
+  }
+}
+
+console.log(arr.slice(0, j));
