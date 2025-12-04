@@ -1,54 +1,46 @@
-// SECTION 3: Constructor and this keyword
-// 	7.	Create a Student class whose constructor accepts name and roll number.
-// Add a method introduce that prints both values.
-// 	8.	Inside the constructor, set values using this.
-// Then try removing this and notice what error occurs and why.
-// 	9.	Create an object with two methods:
-// One method using a normal function
-// One method using an arrow function
+// SECTION 4: Constructor Functions and Prototypes
+// 	10.	Create a User constructor function (do not use class syntax).
+// 	11.	Add a login method in two ways:
+// First, inside the constructor
+// Then, move the method to the prototype
+// 	12.	Create two User objects and compare their login methods using equality.
+// Explain why the result is true or false.
 
-// Inside both, print this and observe the difference.
-
-// The goal is to clearly understand how this works and when it changes.
+// The purpose here is to understand how prototypes help share behavior efficiently.
 
 // Solution
 
-//7.
-class Student {
-  constructor(name, rollno) {
-    this.name = name;
-    this.rollno = rollno;
-  }
+// bina class ke bhi constructor function banta hai
+// es6 se pahele constructor aise banta tha
 
-  introduce() {
-    return this.name + " - " + this.rollno;
-  }
+//10.
+
+function User(val) {
+  this.name = val;
+
+  //11.
+
+  // constructor inside prototye
+  //   this.login = function(){
+  //     console.log("User login")
+  //   }
 }
-let S1 = new Student("Hari", "12");
 
+//11.
+//Oustide the constructor - shared memory
 
-
-// 8.If we remove this, JavaScript will not set values inside the object.
-//  The values remain local to the constructor and the object will not have 
-// those properties, so accessing them results in undefined.
-
-//9.
-
-let obj1 = {
-  fnc: function () {
-    console.log(this);
-  },
+User.prototype.logIn = function () {
+  console.log("User login");
 };
 
-obj1.fnc()  // obj return
+let u1 = new User("Ram");
 
+let u2 = new User("Gopal");
 
-let obj2 = {
-  fnc:  ()=> {
-    console.log(this);
-  },
-};
+//12.
 
-obj2.fnc()  // window return
+console.log(u1.logIn === u2.logIn);
+ // true
+//Because when the method is placed inside the prototype, every object (u1 and u2) points to the same function in shared prototype memory. Therefore, they are equal.
 
-
+//If the method were inside the constructor, it would print false because each object would have its own separate copy.
