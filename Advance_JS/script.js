@@ -1,38 +1,54 @@
-// SECTION 2: Classes and Objects
-// 	4.	Create a Car class with the following:
-// brand
-// speed
-// a drive method that prints the car brand and speed
-// 	5.	Create two different car objects from the same class and verify that their data is different.
-// 	6.	Answer this in your own words:
-// If classes did not exist, how would you write this logic and what problems might occur when the project becomes large?
+// SECTION 3: Constructor and this keyword
+// 	7.	Create a Student class whose constructor accepts name and roll number.
+// Add a method introduce that prints both values.
+// 	8.	Inside the constructor, set values using this.
+// Then try removing this and notice what error occurs and why.
+// 	9.	Create an object with two methods:
+// One method using a normal function
+// One method using an arrow function
+
+// Inside both, print this and observe the difference.
+
+// The goal is to clearly understand how this works and when it changes.
 
 // Solution
-//4.
-class Car {
-  constructor(brand, speed) {
-    this.brand = brand;
-    this.speed = speed;
+
+//7.
+class Student {
+  constructor(name, rollno) {
+    this.name = name;
+    this.rollno = rollno;
   }
 
-  drive() {
-    return this.brand + "- " + this.speed;
+  introduce() {
+    return this.name + " - " + this.rollno;
   }
 }
-let c1 = new Car("Toyata", "120");
+let S1 = new Student("Hari", "12");
 
-//5.
 
-let c2 = new Car("Thar", "180");
 
-//6 Ans:-If classes did not exist, we would need to manually create separate objects for every car with its own properties and methods. We would repeat the same code again and again. When the project becomes large, it will be hard to manage and update. If we want to change something in the drive function, we must update it in every object, which causes duplication and increases the chance of errors. Classes help us reuse the same structure and make the code clean and maintainable.
+// 8.If we remove this, JavaScript will not set values inside the object.
+//  The values remain local to the constructor and the object will not have 
+// those properties, so accessing them results in undefined.
 
-let car1 = {
-  brand: "Toyata",
-  speed: 120,
-  drive: function () {
-    return this.brand + " -" + this.speed;
+//9.
+
+let obj1 = {
+  fnc: function () {
+    console.log(this);
   },
 };
 
-console.log(car1.drive())
+obj1.fnc()  // obj return
+
+
+let obj2 = {
+  fnc:  ()=> {
+    console.log(this);
+  },
+};
+
+obj2.fnc()  // window return
+
+
