@@ -1,96 +1,29 @@
-const users = [
-  {
-    name: "Ava Thompson",
-    pic: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e",
-    bio: "UI/UX designer who loves creating minimal and beautiful experiences.",
-  },
-  {
-    name: "Oliver Hayes",
-    pic: "https://images.unsplash.com/photo-1557862921-37829c790f19",
-    bio: "Frontend developer who enjoys crafting smooth and interactive UI experiences.",
-  },
-  {
-    name: "Sophia Bennett",
-    pic: "https://images.unsplash.com/photo-1524503033411-c9566986fc8f",
-    bio: "Content creator & social media strategist with a love for storytelling.",
-  },
-  {
-    name: "Noah Mitchell",
-    pic: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
-    bio: "Fitness enthusiast and lifestyle blogger sharing wellness tips.",
-  },
-  {
-    name: "Nsabella Reed",
-    pic: "https://images.unsplash.com/photo-1544005313-94ddf0286df2",
-    bio: "Travel photographer capturing moments from around the world.",
-  },
-  {
-    name: "Athan Brooks",
-    pic: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
-    bio: "Software engineer & open-source contributor who loves problem solving.",
-  },
-  {
-    name: "Mia Parker",
-    pic: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde",
-    bio: "Digital marketer helping brands grow through creative campaigns.",
-  },
-];
+//toaster
 
-const cardsBox = document.querySelector(".cards");
-const inp = document.querySelector(".inp");
+function createToaster(config) {
+  return function (notification) {
 
-function showUsers(arr) {
-  cardsBox.innerHTML = ""; 
+    let div = document.createElement("div")
 
-  // If no user found
-  if (arr.length === 0) {
-    cardsBox.innerHTML = "<h2>No user found</h2>";
-    return;
-  }
+    div.className = `fixed ${config.theme ==="dark"?"bg-gray-800 text-white":"bg-gray-100 text-black"} px-6 py-3 rounded shadow-lg pointer-event-none ${
+      config.positionX === "right" ? "right-10" : "left-10"
+    } ${config.positionY === "top" ? "top-10" : "bottom-10"}`;
+    div.textContent = notification
+    document.body.appendChild(div)
 
-  // Creating cards
-  arr.forEach((user) => {
-    const card = document.createElement("div");
-    card.classList.add("card");
+    setTimeout(()=>{
+      document.body.removeChild(div)
 
-    const img = document.createElement("img");
-    img.src = user.pic;
-    img.classList.add("bg-img");
-
-    const blurLayer = document.createElement("div");
-    blurLayer.style.backgroundImage = `url(${user.pic})`;
-    blurLayer.classList.add("blurred-layer");
-
-    const content = document.createElement("div");
-    content.classList.add("content");
-
-    const h3 = document.createElement("h3");
-    h3.textContent = user.name;
-
-    const p = document.createElement("p");
-    p.textContent = user.bio;
-
-    content.appendChild(h3);
-    content.appendChild(p);
-
-    card.appendChild(img);
-    card.appendChild(blurLayer);
-    card.appendChild(content);
-
-    cardsBox.appendChild(card);
-  });
+    }, config.duration*1000)
+   
+  };
 }
 
-showUsers(users);
-
-// Searching users
-inp.addEventListener("input", function () {
-  const text = inp.value.toLowerCase();
-
-  const matchedUsers = users.filter((user) =>
-    user.name.toLowerCase().startsWith(text)
-  );
-
-  showUsers(matchedUsers);
+let toaster = createToaster({
+  positionX: "right",
+  positionY: "top",
+  theme: "dark",
+  duration: 3,
 });
 
+toaster("This a dummy notification");
