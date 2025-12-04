@@ -1,46 +1,51 @@
-// SECTION 4: Constructor Functions and Prototypes
-// 	10.	Create a User constructor function (do not use class syntax).
-// 	11.	Add a login method in two ways:
-// First, inside the constructor
-// Then, move the method to the prototype
-// 	12.	Create two User objects and compare their login methods using equality.
-// Explain why the result is true or false.
+// SECTION 5: call, apply, bind
+// 	13.	Create a function that prints this.name.
+// 	14.	Create an object that contains a name property.
 
-// The purpose here is to understand how prototypes help share behavior efficiently.
+// Use call to run the function using the object
+// Use apply to run the function using the object
+// Use bind to create a new function and then call it
+// 	15.	Borrow a method from one object and run it for another object using call.
 
-// Solution
+// The goal is to understand how this can be manually controlled.
 
-// bina class ke bhi constructor function banta hai
-// es6 se pahele constructor aise banta tha
+// solution
 
-//10.
+//13.
 
-function User(val) {
-  this.name = val;
-
-  //11.
-
-  // constructor inside prototye
-  //   this.login = function(){
-  //     console.log("User login")
-  //   }
+function abcd(a, b, c) {
+  console.log(this.name, a, b, c);
 }
 
-//11.
-//Oustide the constructor - shared memory
+//14.
 
-User.prototype.logIn = function () {
-  console.log("User login");
+let obj = {
+  name: "Sushil",
 };
 
-let u1 = new User("Ram");
+// call()
+abcd.call(obj, 1, 2, 3);
 
-let u2 = new User("Gopal");
+// apply()
 
-//12.
+abcd.apply(obj, [1, 2, 3]);
 
-console.log(u1.logIn === u2.logIn);
- // true
-//Because when the method is placed inside the prototype, every object (u1 and u2) points to the same function in shared prototype memory. Therefore, they are equal.
+// bind() -> does NOT execute immediately — it returns a new copy of the function, and then you call it separately.
 
-//If the method were inside the constructor, it would print false because each object would have its own separate copy.
+let newfnc = abcd.bind(obj, 1, 2, 3);
+newfnc();
+
+//15. borrow method using call
+
+let obj1 = {
+  name: "Karan",
+  sayHello: function () {
+    console.log("Hello" + this.name);
+  },
+};
+
+let obj2 = {
+  name: " Gita",
+};
+
+obj1.sayHello.call(obj2);
