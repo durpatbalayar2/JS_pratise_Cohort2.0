@@ -1,29 +1,34 @@
 // Opps Pratise
 
-// Inheritance Pratise
+// Private Variable - Concept of encapsulation
 
-class Animal {
-  constructor(name, price) {
+class Account {
+  #balance; // private variable
+
+  constructor(name, initialAmt, deposit) {
     this.name = name;
-    this.price = price;
+    this.#balance = initialAmt;
   }
 
-  eat() {
-    console.log(this.name + "eats food");
+  withdraw(amount) {
+    if (this.#balance >= amount) {
+      return (this.#balance -= amount);
+    } else {
+      console.log("Insufficient balance");
+    }
+  }
+
+  deposit(amount) {
+    this.#balance += amount;
+  }
+
+  getBalance() {
+    return this.#balance;
   }
 }
 
-class Dog extends Animal {
-  constructor(name, price, breed) {
-    super(name, price);
+let ac1 = new Account("Ram", 5000);
 
-    this.breed = breed;
-  }
-  bark() {
-    console.log(
-      this.name + " Sound too much  and it is a  " + this.breed + "breed"
-    );
-  }
-}
+ac1.deposit(1000);
 
-d1 = new Dog("Tommy", 1200, "Germen Soffered");
+console.log(ac1);
