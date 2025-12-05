@@ -1,51 +1,31 @@
-// SECTION 5: call, apply, bind
-// 	13.	Create a function that prints this.name.
-// 	14.	Create an object that contains a name property.
+// Opps Pratise
 
-// Use call to run the function using the object
-// Use apply to run the function using the object
-// Use bind to create a new function and then call it
-// 	15.	Borrow a method from one object and run it for another object using call.
+//1
 
-// The goal is to understand how this can be manually controlled.
+class Pencil {
+  constructor(name, price, color) {
+    this.name = name;
+    this.price = price;
+    this.color = color;
+  }
 
-// solution
+  write(text) {
+    let h1 = document.createElement("h1");
+    h1.innerHTML = text;
+    h1.style.color = this.color;
+    document.body.appendChild(h1);
+  }
 
-//13.
+  erase() {
+    let allH1 = document.querySelectorAll("h1");
 
-function abcd(a, b, c) {
-  console.log(this.name, a, b, c);
+    allH1.forEach((element) => {
+      if(element.style.color === this.color){
+      element.remove();
+      }
+    });
+  }
 }
 
-//14.
-
-let obj = {
-  name: "Sushil",
-};
-
-// call()
-abcd.call(obj, 1, 2, 3);
-
-// apply()
-
-abcd.apply(obj, [1, 2, 3]);
-
-// bind() -> does NOT execute immediately — it returns a new copy of the function, and then you call it separately.
-
-let newfnc = abcd.bind(obj, 1, 2, 3);
-newfnc();
-
-//15. borrow method using call
-
-let obj1 = {
-  name: "Karan",
-  sayHello: function () {
-    console.log("Hello" + this.name);
-  },
-};
-
-let obj2 = {
-  name: " Gita",
-};
-
-obj1.sayHello.call(obj2);
+let p1 = new Pencil("Natraj", 10, "black");
+let p2 = new Pencil("Doms", 15, "red");
