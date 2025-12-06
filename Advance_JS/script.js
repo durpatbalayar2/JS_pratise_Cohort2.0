@@ -1,34 +1,23 @@
-// Opps Pratise
+// Call back function
 
-// Private Variable - Concept of encapsulation
-
-class Account {
-  #balance; // private variable
-
-  constructor(name, initialAmt, deposit) {
-    this.name = name;
-    this.#balance = initialAmt;
-  }
-
-  withdraw(amount) {
-    if (this.#balance >= amount) {
-      return (this.#balance -= amount);
-    } else {
-      console.log("Insufficient balance");
-    }
-  }
-
-  deposit(amount) {
-    this.#balance += amount;
-  }
-
-  getBalance() {
-    return this.#balance;
-  }
+//1.
+function abcd(name, fnc) {
+  let nm = name;
+  fnc(nm); // passing parameter received from function call
 }
 
-let ac1 = new Account("Ram", 5000);
+abcd("Hari", function (val) {
+  console.log(val);
+});
 
-ac1.deposit(1000);
+//2.
 
-console.log(ac1);
+function sum(a, b, fnc) {
+  let res = a + b;
+
+  fnc(res);
+}
+
+sum(1, 2, function (result) {
+  console.log(result);
+});
