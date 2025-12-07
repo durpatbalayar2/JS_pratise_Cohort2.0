@@ -1,23 +1,29 @@
-// Call back function
+// Call back function -Day2
 
 //1.
-function abcd(name, fnc) {
-  let nm = name;
-  fnc(nm); // passing parameter received from function call
+
+function displayMessage(message, callback) {
+  console.log(message);
+
+  callback();
 }
 
-abcd("Hari", function (val) {
-  console.log(val);
-});
+function afterMessage() {
+  console.log("Callback executed !");
+}
+
+displayMessage("Hello Everyone!", afterMessage);
 
 //2.
 
-function sum(a, b, fnc) {
-  let res = a + b;
+function getData(callback) {
+  console.log("Fetching data ...");
 
-  fnc(res);
+  setTimeout(() => {
+    callback("Data received !");
+  }, 3000);
 }
 
-sum(1, 2, function (result) {
-  console.log(result);
+getData(function (data) {
+  console.log(data);
 });
