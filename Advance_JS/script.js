@@ -20,7 +20,7 @@ function getData(callback) {
   console.log("Fetching data ...");
 
   setTimeout(() => {
-    callback("Data received !");
+    callback("Data receive !");
   }, 3000);
 }
 
