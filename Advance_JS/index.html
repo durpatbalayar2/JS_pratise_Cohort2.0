@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>User Card with Tailwind CSS</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                darkMode: 'class'
-            }
-        </script>
-    </head>
-    <body class="bg-gray-900">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Card with Tailwind CSS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+  </head>
+  <body class="bg-gray-900">
+    <div
+      class="outer-div relative flex items-center justify-center min-h-screen gap-4"
+    ></div>
 
-        <div class=" outer-div flex items-center justify-center min-h-screen  gap-4">
-          
+    <button
+      class="absolute top-[80%] left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-5 rounded-lg text-2xl shadow-lg transition-colors duration-200 flex items-center gap-2"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-7 w-7"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 4v6h6M20 20v-6h-6M5 19A9 9 0 1 1 19 5"
+        />
+      </svg>
+      Refresh
+    </button>
 
-            
-        </div>
-
-       <script src="./script.js"></script>
-
-    </body>
+    <script src="./script.js"></script>
+  </body>
 </html>
