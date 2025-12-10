@@ -1,57 +1,78 @@
-SECTION 1: Objects and OOPS Thinking (Foundation)
-	1.	Create a user object that stores name and email and has a login method which prints “User logged in”.
-	2.	Imagine you now have 5 users.
-First, think how you would manage them without using a class.
-Then convert the same logic using a class and observe how the code becomes cleaner. Write code for both approaches.
-	3.	Create a product object that stores name and price and has a method which returns the final price after discount.
+ Day 60 — Exercises
 
-The goal of this section is to understand why keeping data and behavior together makes code easier to manage.
+---
 
+## Exercise 1 — Very Easy (Warming up)
 
-SECTION 2: Classes and Objects
-	4.	Create a Car class with the following:
-brand
-speed
-a drive method that prints the car brand and speed
-	5.	Create two different car objects from the same class and verify that their data is different.
-	6.	Answer this in your own words:
-If classes did not exist, how would you write this logic and what problems might occur when the project becomes large?
+**Task (Hindi):** Ek function banao `afterDelay`
 
+**Requirements:**
+- Ye function do cheezein lega:
+  1. `time` (milliseconds)
+  2. `callback` function
+- Given `time` ke baad `callback` call kare
+- Callback ke andar `"Callback executed"` print hona chahiye
 
-SECTION 3: Constructor and this keyword
-	7.	Create a Student class whose constructor accepts name and roll number.
-Add a method introduce that prints both values.
-	8.	Inside the constructor, set values using this.
-Then try removing this and notice what error occurs and why.
-	9.	Create an object with two methods:
-One method using a normal function
-One method using an arrow function
+**Use case:**
+> “2 second baad ek kaam karna hai”
 
-Inside both, print this and observe the difference.
+**Goal:**
+- Samajhna ki callback delay ke baad kaise execute hota hai
+- Ye `setTimeout` + callback connection hai
 
-The goal is to clearly understand how this works and when it changes.
+---
 
+## Exercise 2 — Intermediate (Data flow)
 
+**Task (Hindi):** Ek function banao `getUser`
 
-SECTION 4: Constructor Functions and Prototypes
-	10.	Create a User constructor function (do not use class syntax).
-	11.	Add a login method in two ways:
-First, inside the constructor
-Then, move the method to the prototype
-	12.	Create two User objects and compare their login methods using equality.
-Explain why the result is true or false.
+**Requirements:**
+- `getUser` `username` lega
+- 1 second ke baad `callback` ko ek object de:
+  - `id`
+  - `username`
 
-The purpose here is to understand how prototypes help share behavior efficiently.
+**Then:**
+- Callback ke andar ek aur function call karo `getUserPosts`
 
+**`getUserPosts` requirements:**
+- `userId` lega
+- 1 second ke baad `callback` ko `posts` ka array de
 
+**Final output:**
+- User ka `username` print ho
+- Fir uske `posts` print ho
 
-SECTION 5: call, apply, bind
-	13.	Create a function that prints this.name.
-	14.	Create an object that contains a name property.
+**Goal:**
+- Samajhna ki ek async ka result next async ko kaise milta hai
+- Callback chaining practice
 
-Use call to run the function using the object
-Use apply to run the function using the object
-Use bind to create a new function and then call it
-	15.	Borrow a method from one object and run it for another object using call.
+---
 
-The goal is to understand how this can be manually controlled.
+## Exercise 3 — Intermediate (Callback dependency — thoda painful)
+
+**Task (Hindi):** Teen functions banao:
+
+1. `loginUser`
+   - 1 second baad callback ko `user` object de
+2. `fetchPermissions`
+   - `userId` lega
+   - 1 second baad callback ko `permissions` array de
+3. `loadDashboard`
+   - `permissions` lega
+   - 1 second baad callback ko `"Dashboard loaded"` bole
+
+**Flow:**
+- Pehle `loginUser`
+- Uske andar `fetchPermissions`
+- Uske andar `loadDashboard`
+- Final output console mein print ho
+
+**Goal:**
+- Callback nesting ko feel karna
+- Yehi structure baad mein callback hell banta hai
+
+---
+
+### Notes
+- Practice in plain JavaScript using `setTimeout` and callbacks to understand the flow before converting to Promises/async–await.

@@ -1,62 +1,90 @@
-let display_box = document.querySelector(".display-box");
-let label = document.querySelector(" #label");
-let value = document.querySelector(" #value");
-let profileImg = document.querySelector(".img-container img");
+// Callback Pratise
 
-let btn = document.querySelector(".refreshBtn");
-let dataCollect = {};
+//1
 
-function getUser() {
-  fetch("https://randomuser.me/api/?results=1")
-    .then((rawData) => rawData.json())
-    .then((data) => {
-      let user = data.results[0];
-
-      profileImg.src = user.picture.large;
-
-      dataCollect = {
-        name: {
-          label: "Hi, my name is",
-          value: `${user.name.first} ${user.name.last}`,
-        },
-        email: {
-          label: "My email address is",
-          value: user.email,
-        },
-        birthday: {
-          label: "My birthday is",
-          value: new Date(user.dob.date).toLocaleDateString(),
-        },
-        address: {
-          label: "My address is",
-          value: `${user.location.city}, ${user.location.country}`,
-        },
-        phone: {
-          label: "My phone number is",
-          value: user.phone,
-        },
-        password: {
-          label: "My password is",
-          value: user.login.password,
-        },
-      };
-
-      label.textContent = dataCollect.name.label;
-      value.textContent = dataCollect.name.value;
-    });
+function afterDelay(time, cb) {
+  setTimeout(() => {
+    cb();
+  }, time);
 }
 
-document.querySelectorAll(".icon-container i").forEach(function (icon) {
-  icon.addEventListener("mouseover", function () {
-    let type = icon.getAttribute("data-type");
-    label.textContent = dataCollect[type].label;
-    value.textContent = dataCollect[type].value;
-    display_box.classList.add("show");
+afterDelay(3000, function () {
+  console.log("Callback executed...");
+});
+
+//2
+
+function getUser(username, cb) {
+  console.log("getting user data...")
+  setTimeout(() => {
+    cb({ id: 100, name: username });
+  }, 2000);
+}
+
+function getUserPosts(id, cb) {
+  console.log("getting post details...")
+  setTimeout(() => {
+    cb(["hello", "kese ho"]);
+  }, 3000);
+}
+
+getUser("Ramesh", function (data) {
+  getUserPosts(data.id, function (allposts) {
+    console.log(data.username, allposts);
   });
 });
 
-getUser();
+// Own Scenerio
 
-btn.addEventListener("click", function () {
-  getUser();
+function CollegeJawwo(username, cb) {
+  console.log("Data Fetching....");
+  setTimeout(() => {
+    cb({ id: "1ST21CS063", name: username });
+  }, 2000);
+}
+
+function getStudentDetail(id, cb) {
+
+  console.log("Student data fetching")
+
+  setTimeout(() => {
+    cb({ rollNo: id });
+  }, 3000);
+}
+
+CollegeJawwo("Sushil", function (data) {
+  console.log(data.name);
+
+  getStudentDetail(data.id, function (details) {
+    console.log(details.rollNo);
+  });
+});
+
+//3.
+
+function loginUser(username, cb) {
+  console.log("User details fetching ................");
+
+  setTimeout(() => {
+    cb({ id: 63, name: username });
+  }, 1000);
+}
+function fetchPermissions(id, cb) {
+  console.log("Permission Fetching...........");
+
+  setTimeout(() => {
+    cb(["Access to learn", "Access to Delete", "Access to Modify"]);
+  }, 2000);
+}
+function loadDashboard(permissions, cb) {
+  console.log("Permission Loaded............");
+  cb();
+}
+
+loginUser("Hari", function (userdata) {
+  fetchPermissions(userdata.id, function (permissions) {
+    loadDashboard(permissions, function () {
+      console.log("Permission Loaded Successfully !");
+    });
+  });
 });
