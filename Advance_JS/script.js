@@ -1,19 +1,38 @@
 // Design Pattern
-//  2. Factory Module Pattern - Ek normal fnc use karke naye objs create kiye jaate hai, bina new keyword wor constructor use kiye
+//  4. Observer Pattern -> Aisa design pattern jisme ek object ke change hote hi usse conncected saare dusri objs ko automatically notification milna
 
-function createUser(name, age) {
-  return {
-    name: name,
-    age: age,
-    greet() {
-      return `Hi i am ${name} and I am ${age}years  old. `;
-    },
-  };
+class Channel {
+  constructor() {
+    this.suscribers = []; // Blank array suscribers added
+  }
+
+  suscribe(user) {
+    this.suscribers.push(user);
+    user.update(`${user.name} has suscribed the channel`);
+  }
+  unsuscribe(user) {
+    this.suscribers = this.suscribers.filter((sub) => sub !== user);
+    user.update(`${user.name} has unsuscribed your channel`);
+  }
+  notify(message) {
+    this.suscribers.forEach((sub) => sub.update(message));
+  }
 }
 
-// without using new keyword  we can easily create mulitiple objs
-let user1 = createUser("Ram", 25);
-let user2 = createUser("Sita", 22);
+class User {
+  constructor(name) {
+    this.name = name;
+  }
+  update(data) {
+    console.log(` ${data}`);
+  }
+}
+// channel obj created
+let DBTech = new Channel();
+// user objs created
+let u1 = new User("Ram");
+let u2 = new User("Sita");
 
-console.log(user1.greet());
-console.log(user2.greet());
+DBTech.suscribe(u1);
+DBTech.unsuscribe(u2);
+
