@@ -1,6 +1,5 @@
-// Design Pattern
-
-//Module Pattern
+// Design Pattern 
+//  2. Reavling Module Pattern - Same fnc ko different name se return kar skte hai
 
 let userAmt = (function () {
   let balance = 15000; // private variable
@@ -21,8 +20,8 @@ let userAmt = (function () {
   }
 
   return {
-    balanceAmt,
-    depositeAmt,
-    withdrawAmt,
+    balance: balanceAmt,
+    deposit: depositeAmt,
+    draw: withdrawAmt,
   };
 })();
