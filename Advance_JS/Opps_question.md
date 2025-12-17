@@ -1,78 +1,35 @@
- Day 60 — Exercises
+Before Starting React JS Topic we should know
 
----
+1. Basics of JS
+-> var,let ,const
+-> datatype
+-> operators 
+-> console stmts
+-> conditionals
+-> loops
 
-## Exercise 1 — Very Easy (Warming up)
+2. Arrays / Object
+-> Methods of Array (push,pop,shift,unsift,length)
+-> HOF (forEach, map,filter,reduce,some,find)
+-> basic lvl question solving with array
+-> use of objects
+-> Arrays of objects
+-> basic questions of array of objects
 
-**Task (Hindi):** Ek function banao `afterDelay`
+3. Destructuring
+-> of array
+-> of object
+-> spread operator
+-> rest operator
 
-**Requirements:**
-- Ye function do cheezein lega:
-  1. `time` (milliseconds)
-  2. `callback` function
-- Given `time` ke baad `callback` call kare
-- Callback ke andar `"Callback executed"` print hona chahiye
+4. Function
+-> basics function
+-> arrow function
+-> return statement
+-> parameter , argument
 
-**Use case:**
-> “2 second baad ek kaam karna hai”
+5. Promises, Async/Await , fetch Api
 
-**Goal:**
-- Samajhna ki callback delay ke baad kaise execute hota hai
-- Ye `setTimeout` + callback connection hai
+6. Error Handling
 
----
-
-## Exercise 2 — Intermediate (Data flow)
-
-**Task (Hindi):** Ek function banao `getUser`
-
-**Requirements:**
-- `getUser` `username` lega
-- 1 second ke baad `callback` ko ek object de:
-  - `id`
-  - `username`
-
-**Then:**
-- Callback ke andar ek aur function call karo `getUserPosts`
-
-**`getUserPosts` requirements:**
-- `userId` lega
-- 1 second ke baad `callback` ko `posts` ka array de
-
-**Final output:**
-- User ka `username` print ho
-- Fir uske `posts` print ho
-
-**Goal:**
-- Samajhna ki ek async ka result next async ko kaise milta hai
-- Callback chaining practice
-
----
-
-## Exercise 3 — Intermediate (Callback dependency — thoda painful)
-
-**Task (Hindi):** Teen functions banao:
-
-1. `loginUser`
-   - 1 second baad callback ko `user` object de
-2. `fetchPermissions`
-   - `userId` lega
-   - 1 second baad callback ko `permissions` array de
-3. `loadDashboard`
-   - `permissions` lega
-   - 1 second baad callback ko `"Dashboard loaded"` bole
-
-**Flow:**
-- Pehle `loginUser`
-- Uske andar `fetchPermissions`
-- Uske andar `loadDashboard`
-- Final output console mein print ho
-
-**Goal:**
-- Callback nesting ko feel karna
-- Yehi structure baad mein callback hell banta hai
-
----
-
-### Notes
-- Practice in plain JavaScript using `setTimeout` and callbacks to understand the flow before converting to Promises/async–await.
+7. Import Export
