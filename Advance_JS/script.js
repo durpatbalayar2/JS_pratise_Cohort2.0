@@ -1,34 +1,14 @@
-//Destructing ka matlab hota hai kisi bhi
-// structure (object/array) ko tod kar
-// uske parts alag-alag variables mein rakh dena
+// Import Vs  Export
+//Specially used for making code modular and maintanable (code spliting concept -> Performance optimization)
 
-//1.Obj Destructing
+//Two types:
+// default export 
+// name export
 
-let obj = {
-  user: "Ram",
-  age: 50,
-  city: "Delhi",
-};
+// Step1: Script ka type module karna 
+//Step2: Export ko use karo to export the file/code
+//Step3: Import the same export file so that we can use it 
 
-//Destructing Obj
-let { user, age, city } = obj;
-//Yaha kya hua?
-// user -> obj.user
-// age -> obj.age
-//city -> obj.city
+import a from "./app.js"
 
-console.log(user);
-console.log(age);
-console.log(city);
-
-//2. Array Destructing
-
-let arr = ["Ram", "Hari", "Sita", "Gita", "Karan", "Rita"];
-
-let [a, b,c,...d]= arr;
-
-// yaha kya hua?
-// a -> arr[0]--> Ram
-// b -> arr[1]--> Hari
-// c -> arr[2]--> Sita
-// d -> bakki sab values ek array mein
+console.log(a);  //12
