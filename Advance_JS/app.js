@@ -1,3 +1,12 @@
-let a = 12;
+// export default
 
-export default a;
+function Greet(username) {
+  return `Hello ${username}`;
+}
+export default Greet;
+
+// export name
+
+export const add = function (a,b) {      
+  return a + b;
+};

@@ -1,14 +1,19 @@
-// Import Vs  Export
-//Specially used for making code modular and maintanable (code spliting concept -> Performance optimization)
+// default import
 
-//Two types:
-// default export 
-// name export
+import Greet from "./app.js";
+console.log(Greet("Ram")); // Hello Ram
 
-// Step1: Script ka type module karna 
-//Step2: Export ko use karo to export the file/code
-//Step3: Import the same export file so that we can use it 
+// While importing a default export, any name we can give
 
-import a from "./app.js"
+import Hey from "./app.js";
+console.log(Hey("Sita")); // Hello Sita
 
-console.log(a);  //12
+// name import
+
+import { add } from "./app.js";
+console.log(add(2, 3)); //5
+
+//While importing a named export , we can change its name using the as keyword
+
+import { add as sum } from "./app.js";
+console.log(sum(5, 6)); //11
